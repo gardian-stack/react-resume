@@ -14,14 +14,41 @@ class App extends Component {
     super(props);
     this.state = {
       foo: "bar",
-      resumeData: {}
+      resumeData: {},
+      items: {},
     };
 
     ReactGA.initialize("UA-110570651-1");
     ReactGA.pageview(window.location.pathname);
   }
 
-  getResumeData() {
+  // componentDidMount(){
+  //   fetch('https://jsonplaceholder.typicode.com/users?id=1')
+  //     .then(res => res.json())
+  //     .then(
+  //       // Success
+  //       (result) => {
+  //         this.state({
+  //           isLoaded : true,
+  //           resumeData : result.items
+  //         });
+  //       },
+  //       // Error
+  //       (error) => {
+  //         this.setState({
+  //           isLoaded: true,
+  //           error
+  //         });
+  //       },
+  //     )
+  // }
+
+  // getResumeData() {
+  //
+  // }
+
+  componentDidMount() {
+    // this.getResumeData();
     $.ajax({
       url: "./resumeData.json",
       dataType: "json",
@@ -34,16 +61,27 @@ class App extends Component {
         alert(err);
       }
     });
+
+    $.ajax({
+      url: "https://jsonplaceholder.typicode.com/users?id=1",
+      dataType: "json",
+      cache: false,
+      success: function(data) {
+        this.setState({ items: data });
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.log(err);
+        alert(err);
+      }
+    });
   }
 
-  componentDidMount() {
-    this.getResumeData();
-  }
 
   render() {
+    console.log(this.state.items[0])
     return (
       <div className="App">
-        <Header data={this.state.resumeData.main} />
+        <Header data={this.state.items[0]} />
         <About data={this.state.resumeData.main} />
         <Resume data={this.state.resumeData.resume} />
         <Portfolio data={this.state.resumeData.portfolio} />

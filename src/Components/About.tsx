@@ -3,6 +3,9 @@ import Fade from "react-reveal";
 
 class About extends Component {
   render() {
+    // console.log(this.props.data);
+
+
     if (!this.props.data) return null;
 
     const name = this.props.data.name;
@@ -24,7 +27,7 @@ class About extends Component {
               <img
                 className="profile-pic"
                 src={profilepic}
-                alt="Nordic Giant Profile Pic"
+                alt="ega mardian pic"
               />
             </div>
             <div className="nine columns main-col">
