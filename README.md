@@ -27,3 +27,8 @@ npm start
 ```shell
 npm run build
 ```
+
+### 4. Install typescript
+```shell
+npm install typescript@"3.3.1"
+```
